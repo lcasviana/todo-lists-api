@@ -49,7 +49,7 @@ const post = async (req, res) => {
   }
 };
 
-const patch = async (req, res) => {
+const put = async (req, res) => {
   try {
     const { email } = req.params;
     if (!email)
@@ -71,4 +71,4 @@ const patch = async (req, res) => {
   }
 };
 
-module.exports = { get, post, patch };
+module.exports = { get, post, put };
