@@ -17,5 +17,5 @@ const userRoute = require('./routes/user.route');
 app.use('/api/accounts', accountRoute);
 app.use('/api/users', userRoute);
 
-const port = process.env.port;
+const port = process.env.port || 80;
 app.listen(port, () => console.log(`api port ${port}`));
