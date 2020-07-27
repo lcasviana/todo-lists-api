@@ -10,6 +10,9 @@ const signin = async (req, res) => {
     if (!account)
       return res.status(404).json({ message: `Not found ${email}` });
 
+    if (account.password !== password)
+      return res.status(401).json({ message: `Unauthorized ${email}` });
+
     return res.status(200).json({ email });
   } catch {
     return res.status(500).json({ message: 'Internal server error' });
