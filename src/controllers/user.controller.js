@@ -14,7 +14,7 @@ const userJson = (data) => ({
 const get = async (req, res) => {
   try {
     const { email } = req.params;
-    if (!email)
+    if (!email || !email.trim())
       return res.status(400).json({ message: 'Email invalid' });
 
     const user = await users.findOne({ email });
@@ -30,7 +30,7 @@ const get = async (req, res) => {
 const post = async (req, res) => {
   try {
     const { email } = req.params;
-    if (!email)
+    if (!email || !email.trim())
       return res.status(400).json({ message: 'Email invalid' });
 
     let user = await users.findOne({ email });
@@ -48,7 +48,7 @@ const post = async (req, res) => {
 const patch = async (req, res) => {
   try {
     const { email } = req.params;
-    if (!email)
+    if (!email || !email.trim())
       return res.status(400).json({ message: 'Email invalid' });
 
     const { lists } = req.body;

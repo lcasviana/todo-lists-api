@@ -3,9 +3,9 @@ const accounts = require('../models/account.model');
 const signin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!email?.trim())
+    if (!email || !email.trim())
       return res.status(400).json({ message: 'Email invalid' });
-    if (!password?.trim())
+    if (!password || !password.trim())
       return res.status(400).json({ message: 'Password invalid' });
 
     const account = await accounts.findOne({ email });
@@ -25,11 +25,11 @@ const signin = async (req, res) => {
 const signup = async (req, res) => {
   try {
     const { email, password, name } = req.body;
-    if (!email?.trim())
+    if (!email || !email.trim())
       return res.status(400).json({ message: 'Email invalid' });
-    if (!password?.trim())
+    if (!password || !password.trim())
       return res.status(400).json({ message: 'Password invalid' });
-    if (!name?.trim())
+    if (!name || !name.trim())
       return res.status(400).json({ message: 'Name invalid' });
 
     const account = await accounts.findOne({ email });
@@ -47,11 +47,11 @@ const put = async (req, res) => {
   try {
     const { email } = req.params;
     const { password, name } = req.body;
-    if (!email?.trim())
+    if (!email || !email.trim())
       return res.status(400).json({ message: 'Email invalid' });
-    if (!password?.trim())
+    if (!password || !password.trim())
       return res.status(400).json({ message: 'Password invalid' });
-    if (!name?.trim())
+    if (!name || !name.trim())
       return res.status(400).json({ message: 'Name invalid' });
 
     const account = await accounts.findOne({ email });
