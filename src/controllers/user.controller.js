@@ -2,7 +2,6 @@ const users = require('../models/user.model');
 
 const userJson = (data) => ({
   email: data.email,
-  name: data.name,
   lists: data.lists.map(l => ({
     title: l.title,
     tasks: l.tasks.map(t => ({
@@ -34,16 +33,13 @@ const post = async (req, res) => {
     if (!email)
       return res.status(400).json({ message: 'Email invalid' });
 
-    const { name } = req.body;
-    if (!name)
-      return res.status(400).json({ message: 'Name invalid' });
-
-    const user = await users.findOne({ email });
+    let user = await users.findOne({ email });
     if (user)
       return res.status(409).json({ message: `Conflict ${email}` });
 
-    await users.create({ email, name });
-    return res.status(201).json({ email, name });
+    const lists = [];
+    user = await users.create({ email, lists });
+    return res.status(201).json(userJson(user));
   } catch {
     return res.status(500).json({ message: 'Internal server error' });
   }
